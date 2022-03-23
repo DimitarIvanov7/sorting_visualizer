@@ -2,6 +2,7 @@ import React from "react";
 
 const testFunc = (test) => {
   debugger;
+  debugger;
   console.log("test");
 };
 
