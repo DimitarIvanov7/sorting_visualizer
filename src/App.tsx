@@ -1,9 +1,7 @@
 import React from "react";
 
 const testFunc = (test) => {
-  debugger;
-  debugger;
-  console.log("test");
+  !!!!console.log("test");
 };
 
 function App() {
