@@ -13,7 +13,9 @@
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-scripts": "5.0.0",
+		"timers-promises": "^1.0.1",
 		"typescript": "^4.6.2",
+		"use-async-effect2": "^0.12.2",
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
