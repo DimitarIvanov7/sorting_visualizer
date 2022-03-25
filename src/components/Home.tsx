@@ -4,6 +4,8 @@ import Blocks from "./Blocks";
 import AddSettings from "./AddSettings";
 import { setTimeout } from "timers-promises";
 
+const worker = new Worker("./workers/worker.js");
+
 export interface IState {
   blocks: {
     height: number;
@@ -267,12 +269,10 @@ function Home() {
   ]);
   const [inProgress, setInProgress] = useState(false);
 
-  const [pause, setPause] = useState(false);
+  const inputSpeedValue = useRef<HTMLInputElement | null>(null);
+  const algoValue = useRef<HTMLSelectElement | null>(null);
 
-  const inputSpeedValue = useRef<HTMLInputElement>(null);
-  const algoValue = useRef<HTMLInputElement>(null);
-
-  const newBlocks = async (e: React.MouseEvent<HTMLInputElement>) => {
+  const newBlocks = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentInput = e.target.value;
 
     const blockNumber = currentInput && parseInt(currentInput);
@@ -288,31 +288,22 @@ function Home() {
     setBlocks(BlocksHeight);
   };
 
-  const startSorting = () => {
+  const startSorting = (): void => {
     callSorting(
       algoValue.current && algoValue.current.value,
       inputSpeedValue.current && inputSpeedValue.current.value
     );
   };
 
-  const handlePause = (state: boolean) => {
-    setPause(state);
-  };
-
   const bubbleSort = async (speed: number) => {
     setInProgress(true);
+    console.log("dick");
+
+    worker.postMessage("test");
 
     const sortedBlocks = [...blocks];
     //Outer pass
     for (let i = 0; i < sortedBlocks.length; i++) {
-      // if (!pause) {
-      // 	console.log(pause);
-      // }
-
-      const paused = pause;
-      // const pausedType = typeof paused;
-      console.log(paused);
-
       //Inner pass
       for (let j = 0; j < sortedBlocks.length - i - 1; j++) {
         //Value comparison using ascending order
@@ -395,7 +386,7 @@ function Home() {
     setInProgress(false);
   };
 
-  const callSorting = (func: string, speed: string) => {
+  const callSorting = (func: string | null, speed: string | null) => {
     console.log(func);
 
     for (let i = 0; i < 2; i++) {
@@ -433,7 +424,6 @@ function Home() {
             newBlocks={newBlocks}
             startSorting={startSorting}
             inProgress={inProgress}
-            setPause={handlePause}
           />
         </section>
       </div>

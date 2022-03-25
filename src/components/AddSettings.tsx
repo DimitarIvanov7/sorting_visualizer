@@ -2,10 +2,9 @@ import React, { LegacyRef } from "react";
 
 interface PropTypes {
   inputSpeedValue: LegacyRef<HTMLInputElement>;
-  newBlocks: React.MouseEventHandler<HTMLInputElement>;
-  algoValue: LegacyRef<HTMLInputElement>;
-  startSorting: React.MouseEventHandler<HTMLButtonElement>;
-  setPause: React.MouseEventHandler<HTMLButtonElement>;
+  newBlocks: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  algoValue: React.MutableRefObject<HTMLSelectElement>;
+  startSorting: () => void;
   inProgress: boolean;
 }
 
@@ -15,7 +14,6 @@ function AddSettings({
   newBlocks,
   startSorting,
   inProgress,
-  setPause,
 }: PropTypes) {
   return (
     <div className="mt-10">
@@ -62,19 +60,11 @@ function AddSettings({
         <button
           onClick={() => {
             startSorting();
-            // setPause(false);
           }}
           disabled={inProgress}
           className="bg-slate-600 text-white px-3 py-1 rounded-sm text-2xl hover:bg-slate-900 transition ease delay-150"
         >
           Start
-        </button>
-        <button
-          onClick={() => setPause(true)}
-          disabled={!inProgress}
-          className="bg-slate-600 text-white px-3 py-1 rounded-sm text-2xl hover:bg-slate-900 transition ease delay-150"
-        >
-          Pause
         </button>
       </div>
     </div>
