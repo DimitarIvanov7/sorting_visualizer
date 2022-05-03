@@ -8,13 +8,13 @@ interface PropTypes {
   inProgress: boolean;
 }
 
-function AddSettings({
+const AddSettings: React.FC<PropTypes> = ({
   inputSpeedValue,
   algoValue,
   newBlocks,
   startSorting,
   inProgress,
-}: PropTypes) {
+}) => {
   return (
     <div className="mt-10">
       <p className="text-4xl text-center">Select sorting algorithm</p>
@@ -69,6 +69,6 @@ function AddSettings({
       </div>
     </div>
   );
-}
+};
 
 export default AddSettings;

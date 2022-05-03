@@ -5,7 +5,7 @@ interface BlockProps {
   block: Props["blocks"];
 }
 
-const Blocks = ({ block }: BlockProps) => {
+const Blocks: React.FC<BlockProps> = ({ block }) => {
   const heightBl = `${block.height.toString()}px`;
   return (
     <div
